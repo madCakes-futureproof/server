@@ -1,0 +1,15 @@
+version: "3"
+services:
+  api:
+    image: node:slim
+    working_dir: /code
+    volumes:
+      - type: bind
+        source: ./api
+        target: /code
+  db:
+    image: postgres:12.4
+    environment:
+      - POSTGRES_USER=futureproof
+    volumes:
+      - "./db/migrations:/docker-entrypoint-initdb.d/:ro"
