@@ -1,6 +1,6 @@
-DROP TABLE IF EXISTS user;
+DROP TABLE IF EXISTS userAccount;
 
-CREATE TABLE user (
+CREATE TABLE userAccount (
     id serial PRIMARY KEY,
     username varchar(30) NOT NULL,
     password char(60) NOT NULL

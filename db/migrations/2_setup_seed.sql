@@ -1,4 +1,4 @@
-INSERT INTO user (username, password) 
+INSERT INTO userAccount (username, password) 
 VALUES
 (
     'Molly234',
