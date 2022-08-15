@@ -7,7 +7,7 @@
     "test": "tests"
   },
   "scripts": {
-    "start": "node server.js",
+    "start": "node index.js",
     "dev": "nodemon -L index.js",
     "test": "jest --watch --verbose",
     "cov": "jest --coverage --verbose"
