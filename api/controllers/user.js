@@ -66,7 +66,8 @@ async function register(req, res) {
 
 async function showOne(req, res) {
   try {
-    const user = await User.getOneByUsername(req.params.username);
+    const username = await req.body.username
+    const user = await User.getOneByUsername(username);
     res.status(200).json(user);
   } catch (err) {
     res.status(400).json({ err });
