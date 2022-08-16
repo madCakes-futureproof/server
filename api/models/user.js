@@ -18,14 +18,15 @@ class User {
       }
     });
   }
-// may change to get by id
-  static getOneByUsername(username) {
+// may change to get by id PROG
+  static async getOneById(id) {
     return new Promise(async (resolve, reject) => {
       try {
         const userData = await db.query(
-          `SELECT * FROM userAccount WHERE username = $1;`,
-          [username]
+          `SELECT * FROM userAccount WHERE id = $1;`,
+          [id]
         );
+        console.log(userData)
         const user = new User(userData.rows[0]);
         resolve(user);
       } catch (err) {
@@ -35,7 +36,21 @@ class User {
     });
   }
 
-  static register(data) {
+  async getHabits () {
+    return new Promise(async (resolve, reject) => {
+      try {
+        const result = await db.query(`SELECT * FROM habit WHERE user.id = $1;`,
+        [this.id]);
+        const habits = result.rows.map(h => ({username: h.username, path: `/habits/${h.id}`}));
+
+        resolve(habits)
+      } catch (err) {
+        reject(err);
+      }
+    });
+  }
+
+  static async register(data) {
     return new Promise(async (resolve, reject) => {
       try {
         const { username, password } = data;
@@ -54,7 +69,7 @@ class User {
   }
 
 //  Join tables for habits and don't show password TODO
-  static showOne(username) {
+  static async showOne(username) {
     return new Promise(async (resolve, reject) => {
       try {
         const userData = await db.query(
@@ -67,6 +82,20 @@ class User {
         reject(err);
       }
     });
+  }
+
+  delete() {
+    return new Promise(async (resolve, reject) => {
+        try {
+            // Query database to delete user
+          const result = await db.query(`DELETE FROM userAccount WHERE id = $1 RETURNING id;`,[this.id]);
+            // delete habits
+            // call a new class with delete from habit
+            resolve(`User has been deleted!`);
+          } catch (err) {
+          reject(err);
+        }
+      });
   }
 }
 

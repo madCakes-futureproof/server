@@ -63,12 +63,12 @@ async function register(req, res) {
     res.status(422).json({ err });
   }
 }
-
+// TODO getbyid
 async function showOne(req, res) {
   try {
     // check model getOneByUsername 
     const username = await req.body.username
-    const user = await User.getOneByUsername(username);
+    const user = await User(username);
     res.status(200).json(user);
   } catch (err) {
     res.status(400).json({ err });
@@ -77,8 +77,16 @@ async function showOne(req, res) {
 
 async function deleteUser(req, res) {
   try {
-    const user = await User.delete(req.body.username);
-    res.status(204).json({ message: "Success! User deleted!" });
+    console.log(1)
+    
+    const user = await User.getOneById(req.params.id);
+    console.log(2)
+    const resp = await user.delete()
+
+    // console.log(user)
+    // console.log(resp)
+    res.status(204).end(resp);
+    
   } catch (err) {
     res.status(404).json({});
   }
