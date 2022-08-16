@@ -66,6 +66,7 @@ async function register(req, res) {
 
 async function showOne(req, res) {
   try {
+    // check model getOneByUsername 
     const username = await req.body.username
     const user = await User.getOneByUsername(username);
     res.status(200).json(user);

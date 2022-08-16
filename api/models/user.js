@@ -18,7 +18,7 @@ class User {
       }
     });
   }
-
+// may change to get by id
   static getOneByUsername(username) {
     return new Promise(async (resolve, reject) => {
       try {
