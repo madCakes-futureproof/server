@@ -2,7 +2,8 @@
 const express = require("express");
 const cors = require("cors");
 
-const userRouter = require('./routes/user')
+const userRouter = require('./routes/user');
+const habitRouter = require('./routes/habit')
 
 const server = express();
 
@@ -16,5 +17,6 @@ server.get("/", (req, res) =>
 );
 
 server.use('/users', userRouter);
+server.use('/habits', habitRouter)
 
 module.exports = server;

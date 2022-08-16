@@ -18,29 +18,33 @@ VALUES
 );
 
 
-INSERT INTO habit (name, repetitions, frequency, completed) 
+INSERT INTO habit (name, repetitions, frequency, completed, streak) 
 VALUES
 (
     'Gym',
     5,
     'Weekly',
-    true
+    true,
+    2
 ),
 (
     'Drink Water 2 litres',
     1,
     'Daily',
-    false
+    false,
+    0
 ),
 (
     'Sleep 8 hours',
     1,
     'Daily',
-    false
+    false,
+    0
 ),
 (
     'Meditation',
     2,
     'Daily',
-    true
+    true,
+    2
 );

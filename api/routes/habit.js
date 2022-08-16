@@ -5,7 +5,7 @@ const habitRouter = Router();
 
 habitRouter.get("/", habitController.index);
 habitRouter.get("/:id", habitController.showOne);
-habitRouter.post("/:id", habitController.createHabit);
+habitRouter.post("/", habitController.createHabit);
 habitRouter.post("/:id", habitController.updateHabit);
 habitRouter.delete("/:id", habitController.deleteHabit);
 
