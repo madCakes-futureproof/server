@@ -13,5 +13,6 @@ CREATE TABLE habit (
     name varchar(30) NOT NULL,
     repetitions INT NOT NULL,
     frequency varchar(20) NOT NULL,
-    completed boolean NOT NULL
+    completed boolean NOT NULL,
+    streak INT NOT NULL
 );
