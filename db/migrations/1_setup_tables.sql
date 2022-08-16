@@ -14,5 +14,6 @@ CREATE TABLE habit (
     repetitions INT NOT NULL,
     frequency varchar(20) NOT NULL,
     completed boolean NOT NULL,
-    streak INT NOT NULL
+    streak INT NOT NULL,
+    user_id INT REFERENCES userAccount (id) NOT NULL
 );
