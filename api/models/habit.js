@@ -15,6 +15,13 @@ class Habit {
 
   }
 
+  
+  static async getAll(){
+    return new Promise(async (resolve, reject) => {
+
+    });
+  }
+
   static async getOneById(id){
     return new Promise(async (resolve, reject) => {
         try {
@@ -28,6 +35,24 @@ class Habit {
         } catch (err) {
           reject("Habit not found");
         }
+      });
+  }
+
+  static async create(data){
+    return new Promise(async (resolve, reject) => {
+
+    });
+  }
+
+  static async update(data){
+    return new Promise(async (resolve, reject) => {
+
+    });
+  }
+
+  delete() {
+    return new Promise(async (resolve, reject) => {
+        
       });
   }
 }
