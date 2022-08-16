@@ -8,6 +8,18 @@ class User {
         this.password = data.password;
     }
 
+    static getAll () {
+        return new Promise( async (resolve, reject) => {
+            try {
+                const result = await db.query(`SELECT * FROM userAccount;`);
+                const users = result.rows.map(u => new User(u));
+                resolve(users);
+            } catch (err) {
+                reject(err);
+            }
+        })
+    }
+
     static getOneByUsername (username) {
         return new Promise (async (resolve, reject) => {
             try {
@@ -22,3 +34,5 @@ class User {
     }
 
 }
+
+module.exports = User;
