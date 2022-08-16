@@ -2,6 +2,8 @@
 const express = require("express");
 const cors = require("cors");
 
+const userRouter = require('./routes/user')
+
 const server = express();
 
 // middleware
@@ -12,5 +14,7 @@ server.use(express.json());
 server.get("/", (req, res) =>
   res.send("Welcome to the Hacker Health Tracker API!")
 );
+
+server.use('/users', userRouter);
 
 module.exports = server;
