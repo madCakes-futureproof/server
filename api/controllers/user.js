@@ -14,6 +14,8 @@ async function createToken(userData) {
     return token;
 }
 
+
+
 async function login(req, res) {
 
     try {
@@ -45,6 +47,16 @@ async function login(req, res) {
     }
 }
 
+async function index(req, res) {
+    try {
+      const users = await User.getAll();
+      res.status(200).json(users);
+    } catch (err) {
+      res.status(404).json({ err });
+    }
+  }
+
 module.exports = {
-    login
+    login, index
 }
+

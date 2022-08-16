@@ -2,7 +2,7 @@ INSERT INTO userAccount (username, password)
 VALUES
 (
     'Molly234',
-    'password1'
+    'frangipane'
 ),
 (
     'captainFantastic',
