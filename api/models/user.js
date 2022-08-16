@@ -52,7 +52,8 @@ class User {
       }
     });
   }
-  // showOne takes in the id, so we need to change this function and potentially the controller too. My bad 💥
+
+//  Join tables for habits and don't show password TODO
   static showOne(username) {
     return new Promise(async (resolve, reject) => {
       try {
