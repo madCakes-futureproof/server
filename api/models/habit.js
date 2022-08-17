@@ -53,7 +53,6 @@ class Habit {
           [name, repetitions, frequency, completed, streak, user_id]
         );
         let habit = new Habit(newHabit.rows[0]);
-        console.log({model: habit})
         resolve(habit);
       } catch (err) {
         console.log(err);
@@ -72,11 +71,13 @@ class Habit {
             completed = completed || this.completed;
             streak = streak || this.streak;
             user_id = user_id || this.user_id;
+
             const updateHabitData = await db.query(`UPDATE habit SET name =  $2, repetitions = $3, frequency = $4, completed = $5, streak = $6, user_id = $7 WHERE id = $1 RETURNING *;`, [ this.id, name, repetitions, frequency, completed, streak, user_id]);
+
             let updatedHabit = new Habit(updateHabitData.rows[0]);
             resolve(updatedHabit);
         } catch(err) {
-            reject("Error updating habit")
+          reject("Error updating habit")
         }
     })
 }
