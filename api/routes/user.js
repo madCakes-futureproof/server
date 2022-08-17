@@ -6,7 +6,7 @@ const userRouter = Router();
 userRouter.get("/", userController.index);
 userRouter.get("/:id", userController.showOne);
 userRouter.post("/login", userController.login);
-userRouter.post("/", userController.register);
+userRouter.post("/register", userController.register);
 userRouter.delete("/:id", userController.deleteUser);
 
 module.exports = userRouter;
