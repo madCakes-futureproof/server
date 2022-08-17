@@ -9,10 +9,9 @@ class Habit {
     this.completed = data.completed;
     this.streak = data.streak;
     this.user = {
-        username: user.username,
-        path: `./users/${user.id}`
+        // username: user.username,
+        id: data.user_id
     }
-
   }
 
   
@@ -32,7 +31,7 @@ class Habit {
     return new Promise(async (resolve, reject) => {
         try {
           let habitData = await db.query(
-            `SELECT habit.*, user.id as user_id FROM habit JOIN userAccount ON user.id = habit.user_id WHERE habit.id = $1;`,
+            `SELECT * FROM habit WHERE id = $1;`,
             [id]         
           );
           let habit = new Habit(habitData.rows[0]);
@@ -47,13 +46,14 @@ class Habit {
   static async create(data){
     return new Promise(async (resolve, reject) => {
       try {
-        const { name, repetitions, frequency, completed, streak } = data;
+        const { name, repetitions, frequency, completed, streak, user_id } = data;
 
         const newHabit = await db.query(
-          `INSERT INTO habit (name, repetitions, frequency, completed, streak) VALUES ($1, $2, $3, $4, $5) RETURNING *;`,
-          [name, repetitions, frequency, completed, streak]
+          `INSERT INTO habit (name, repetitions, frequency, completed, streak, user_id) VALUES ($1, $2, $3, $4, $5, $6) RETURNING *;`,
+          [name, repetitions, frequency, completed, streak, user_id]
         );
         let habit = new Habit(newHabit.rows[0]);
+        console.log({model: habit})
         resolve(habit);
       } catch (err) {
         console.log(err);
@@ -63,15 +63,16 @@ class Habit {
     });
   }
 
-  update(name, repetitions, frequency, completed, streak) {
+  update(name, repetitions, frequency, completed, streak, user_id) {
     return new Promise (async (resolve, reject) => {
         try {
             name = name || this.name;
             repetitions = repetitions || this.repetitions;
             frequency = frequency || this.frequency;
             completed = completed || this.completed;
-            streak = streak || this.streak
-            const updateHabitData = await db.query(`UPDATE habit SET name =  $2, repetitions = $3, frequency = $4, completed = $5, streak = $6 WHERE id = $1 RETURNING *;`, [ this.id, name, repetitions, frequency, completed, streak]);
+            streak = streak || this.streak;
+            user_id = user_id || this.user_id;
+            const updateHabitData = await db.query(`UPDATE habit SET name =  $2, repetitions = $3, frequency = $4, completed = $5, streak = $6, user_id = $7 WHERE id = $1 RETURNING *;`, [ this.id, name, repetitions, frequency, completed, streak, user_id]);
             let updatedHabit = new Habit(updateHabitData.rows[0]);
             resolve(updatedHabit);
         } catch(err) {
