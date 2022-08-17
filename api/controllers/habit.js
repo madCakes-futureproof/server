@@ -23,10 +23,12 @@ async function showOne(req, res) {
 async function createHabit(req, res) {
 
   try {
-    const { name, repetitions, frequency, completed } = req.body;
+    const { name, repetitions, frequency, completed, streak } = req.body;
+    console.log(req.body)
 
-    const habit = await Habit.create({ name, repetitions, frequency, completed });
-    
+    const habit = await Habit.create({ name, repetitions, frequency, completed, streak });
+    console.log(habit.detail)
+
     res.status(200).json(habit);
 
   } catch (err) {
