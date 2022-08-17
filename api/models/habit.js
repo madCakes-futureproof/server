@@ -72,7 +72,7 @@ class Habit {
             streak = streak || this.streak;
             user_id = user_id || this.user_id;
 
-            const updateHabitData = await db.query(`UPDATE habit SET name =  $2, repetitions = $3, frequency = $4, completed = $5, streak = $6, user_id = $7 WHERE id = $1 RETURNING *;`, [ this.id, name, repetitions, frequency, completed, streak, user_id]);
+            const updateHabitData = await db.query(`UPDATE habit SET name =  $1, repetitions = $2, frequency = $3, completed = $4, streak = $5, user_id = $6 WHERE id = $7 RETURNING *;`, [name, repetitions, frequency, completed, streak, user_id, this.id]);
 
             let updatedHabit = new Habit(updateHabitData.rows[0]);
             resolve(updatedHabit);

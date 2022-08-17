@@ -10,7 +10,7 @@ DROP TABLE IF EXISTS habit;
 
 CREATE TABLE habit (
     id serial PRIMARY KEY,
-    name varchar(30) NOT NULL,
+    name varchar(1000) NOT NULL,
     repetitions INT NOT NULL,
     frequency varchar(20) NOT NULL,
     completed boolean NOT NULL,

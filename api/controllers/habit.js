@@ -40,13 +40,13 @@ async function updateHabit(req, res) {
 
   try {
     const { name, repetitions, frequency, completed, streak, user_id } = req.body;
-    console.log(name)
+    console.log(req.body)
 
     const habit = await Habit.getOneById(req.params.id)
     console.log(habit)
 
-    const updatedHabit = await habit.update({name, repetitions, frequency, completed, streak, user_id});
-    console.log(updateHabit)
+    const updatedHabit = await habit.update(name, repetitions, frequency, completed, streak, user_id);
+    console.log(updatedHabit)
 
 
     res.status(200).json(updatedHabit);
