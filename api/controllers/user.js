@@ -6,9 +6,7 @@ const User = require("../models/User");
 async function createToken(userData) {
   const token = await jwt.sign({
     username: userData["username"],
-    password: userData["password"],
-  });
-  //{ expiresIn: 60 * 60 }
+  }, process.env["SECRET_PASSWORD"], { expiresIn: 60 * 60 });
 
   return token;
 }
@@ -28,8 +26,6 @@ async function login(req, res) {
     const password = req.body.password;
 
     const user = await User.getOneByUsername(username);
-
-    // Check here if the password matches the hash
     const authenticated = await bcrypt.compare(password, user.password);
 
     if (authenticated) {
@@ -52,17 +48,20 @@ async function login(req, res) {
 
 async function register(req, res) {
   try {
-    const username = await req.body.username;
-    const password = await req.body.password;
-
+    const newUser = await User.register(req.body);
+    
     res.status(201).json({
-      username,
-      password,
+      "username": newUser.username,
+      "password": newUser.password
     });
+
   } catch (err) {
+    console.log(err)
     res.status(422).json({ err });
   }
 }
+
+
 // TODO getbyid
 async function showOne(req, res) {
   try {

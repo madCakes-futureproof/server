@@ -1,4 +1,6 @@
 const db = require("../dbConfig/init");
+const bcrypt = require("bcrypt");
+
 
 class User {
   constructor(data) {
@@ -6,6 +8,19 @@ class User {
     this.username = data.username;
     this.password = data.password;
   }
+  
+  static getOneByUsername (username) {
+    return new Promise (async (resolve, reject) => {
+        try {
+            const userData = await db.query(`SELECT * FROM userAccount WHERE username = $1;`, [ username ]);
+            const user = new User(userData.rows[0]);
+            resolve (user);
+        } catch (err) {
+            console.log(err);
+            reject('Unable to locate user.');
+        }
+    });
+}
 
   static getAll() {
     return new Promise(async (resolve, reject) => {
@@ -18,7 +33,8 @@ class User {
       }
     });
   }
-// may change to get by id PROG
+
+  
   static async getOneById(id) {
     return new Promise(async (resolve, reject) => {
       try {
@@ -50,14 +66,16 @@ class User {
     });
   }
 
+
   static async register(data) {
     return new Promise(async (resolve, reject) => {
       try {
         const { username, password } = data;
-
+        const hashedPassword = await bcrypt.hash(password, 10)
+        
         const newUser = await db.query(
           `INSERT INTO userAccount (username, password) VALUES ($1, $2) RETURNING *;`,
-          [username, password]
+          [username, hashedPassword]
         );
         let user = new User(newUser.rows[0]);
         resolve(user);
@@ -68,7 +86,6 @@ class User {
     });
   }
 
-//  Join tables for habits and don't show password TODO
   static async showOne(username) {
     return new Promise(async (resolve, reject) => {
       try {
@@ -97,6 +114,6 @@ class User {
         }
       });
   }
-}
+};
 
 module.exports = User;

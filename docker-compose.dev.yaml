@@ -10,6 +10,7 @@ services:
       - PGDATABASE=library
       - PGPORT=5432
       - NODE_ENV=development
+      - SECRET_PASSWORD=${SECRET_PASSWORD}
     depends_on:
       - db
     command: bash -c "npm install && npm run dev"

@@ -8,7 +8,7 @@ function verifyToken(req, res, next) {
 
         const token = header.split(' ')[1];
 
-        jwt.verify(token, userData["password"], (err, data) => {
+        jwt.verify(token, process.env["SECRET_PASSWORD"], (err, data) => {
 
             if (err) {
                 res.status(401).json({success: false,
@@ -25,6 +25,6 @@ function verifyToken(req, res, next) {
                               message: "This route requires authorisation"})
     }
 
-}
+};
 
 module.exports = verifyToken;
