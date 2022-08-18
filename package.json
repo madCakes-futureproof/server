@@ -10,7 +10,8 @@
     "start": "node index.js",
     "dev": "nodemon -L index.js",
     "test": "jest --watch --verbose",
-    "cov": "jest --coverage --verbose"
+    "cov": "jest --coverage --verbose",
+    "seedDev": "node dbConfig/seedDev.js" 
   },
   "repository": {
     "type": "git",
