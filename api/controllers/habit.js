@@ -27,7 +27,6 @@ async function createHabit(req, res) {
     console.log(req.body)
 
     const habit = await Habit.create({ name, repetitions, frequency, completed, streak, user_id });
-    console.log(habit.detail)
 
     res.status(200).json(habit);
 
@@ -35,7 +34,7 @@ async function createHabit(req, res) {
     res.status(500).json({ err });
   }
 }
-
+// ✅
 async function updateHabit(req, res) {
 
   try {
