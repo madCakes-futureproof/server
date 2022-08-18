@@ -30,6 +30,7 @@ async function login(req, res) {
 
     if (authenticated) {
       res.json({
+        user,
         success: true,
         token: "Bearer " + (await createToken(user)),
       });
@@ -51,6 +52,7 @@ async function register(req, res) {
     const newUser = await User.register(req.body);
     
     res.status(201).json({
+      newUser,
       "username": newUser.username,
       "password": newUser.password
     });
