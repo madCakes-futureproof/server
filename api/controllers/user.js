@@ -61,13 +61,11 @@ async function register(req, res) {
   }
 }
 
-
-// TODO getbyid
 async function showOne(req, res) {
   try {
     // check model getOneByUsername 
-    const username = await req.body.username
-    const user = await User(username);
+    // const username = await req.body.username
+    const user = await User.getOneById(req.params.id);
     res.status(200).json(user);
   } catch (err) {
     res.status(400).json({ err });
