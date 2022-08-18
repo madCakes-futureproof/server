@@ -13,7 +13,9 @@
 - Installed packages Jest and Supertest for testing
 - Installed packages Bcrypt and JWT for authorisation and authentication 
 - Installed postgres for SQL server
-# Run project
+
+## Run project
+
 - bash _scripts/startDev.sh 
 
 ## Credits 
