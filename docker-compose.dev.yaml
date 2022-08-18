@@ -13,7 +13,7 @@ services:
       - SECRET_PASSWORD=${SECRET_PASSWORD}
     depends_on:
       - db
-    command: bash -c "npm install && npm run dev"
+    command: bash -c "npm install && npm run seedDev && npm run dev"
   db:
     container_name: habit_dev_db
     volumes:
@@ -27,4 +27,4 @@ volumes:
 networks:
   default:
     name: habit_api
-# && npm run seedDev
+
