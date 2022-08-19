@@ -22,19 +22,19 @@ INSERT INTO userAccount (username, password)
 VALUES
 (
     'Molly234',
-    'frangipane'
+    '$2b$10$c2lJLFUrQTfBCq2Z0qH9T.SOn93dkwgpkq7maBVvo1u4TRcxTOYAW'
 ),
 (
     'captainFantastic',
-    'password12'
+    '$2b$10$kB1R2OR6/z.k7WEkrPbDO.OWEWjM3uzuQoIWS.W1uIJkdIoH3BSuy'
 ),
 (
     'Joe_User',
-    'password3'
+    '$2b$10$/UXFN6kmzbm8CZha2Kj5OuMDDn4UXpb65ScKmECe9gC5eaZv1ua1e'
 ),
 (
     'SteveO555',
-    'password4'
+    '$2b$10$fZbK4QXNOj5vZ0k1wdJVau3hJaBJ753ULCTaGMQdJNqlth42d7hca'
 );
 
 INSERT INTO habit (name, repetitions, frequency, completed, streak) 
